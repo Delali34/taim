@@ -12,6 +12,21 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: {
+        apple: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "San Francisco",
+          "Helvetica Neue",
+          "Helvetica",
+          "Ubuntu",
+          "Roboto",
+          "Noto",
+          "Segoe UI",
+          "Arial",
+          "sans-serif",
+        ],
+      },
     },
   },
   plugins: [],
