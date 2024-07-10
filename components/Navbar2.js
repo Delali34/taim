@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed w-full z-50 transition-all duration-300 ${
+        className={`sticky top-0 w-full z-50 transition-all duration-300 ${
           isScrolled ? "shadow-lg" : ""
         } bg-white mt-4 font-apple`}
       >
@@ -38,6 +38,7 @@ const Navbar = () => {
               <div className="ml-10 flex items-center space-x-4">
                 {[
                   "About",
+                  "Band",
                   "Book session",
                   "Leadership",
                   "Programs",

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaInstagram, FaYoutube, FaTwitter, FaFacebook } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 // Custom hook for intersection observer
 const useIntersectionObserver = (options) => {
@@ -151,9 +152,9 @@ const Socials = () => {
       color: "from-red-600 to-red-700",
     },
     {
-      name: "X",
+      name: "X.com",
       href: "https://x.com/taim_worldwide?s=21&t=6mlcBkuEixMIzX9NHMScAg",
-      icon: FaTwitter,
+      icon: FaXTwitter,
       color: "from-blue-400 to-blue-600",
     },
     {
