@@ -38,8 +38,8 @@ const Navbar = () => {
               <div className="ml-10 flex items-center space-x-4">
                 {[
                   "About",
-                  "Book session",
-                  "Leadership",
+                  // "Book session",
+                  // "Leadership",
                   "Programs",
                   "Donate",
                 ].map((item) => (
@@ -104,9 +104,9 @@ const Navbar = () => {
           <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-4"></div>
           {[
             "About",
-            "Band",
-            "Book session",
-            "Leadership",
+            // "Band",
+            // "Book session",
+            // "Leadership",
             "Programs",
             "Donate",
           ].map((item) => (

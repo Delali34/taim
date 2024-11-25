@@ -1,6 +1,6 @@
-"use client";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Award, Globe, Target } from "lucide-react";
 
 const About = ({ images = [] }) => {
   const ref = useRef(null);
@@ -13,102 +13,142 @@ const About = ({ images = [] }) => {
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
   const y = useTransform(scrollYProgress, [0, 0.5, 1], [100, 0, -100]);
 
-  useEffect(() => {
-    const parallaxElements = document.querySelectorAll(".parallax");
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset;
-      parallaxElements.forEach((el) => {
-        const speed = el.dataset.speed;
-        el.style.transform = `translateY(${scrolled * speed}px)`;
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const featuredStats = [
+    {
+      icon: Globe,
+      title: "Global Reach",
+      description: "Serving communities across multiple nations",
+      value: "10+ Countries",
+    },
+    {
+      icon: Target,
+      title: "Mission Focus",
+      description: "Dedicated to transformative intercession",
+      value: "Disciple-Making",
+    },
+    {
+      icon: Award,
+      title: "Commitment",
+      description: "Unwavering dedication to spiritual growth",
+      value: "24/7 Prayer",
+    },
+  ];
 
   return (
     <section
       ref={ref}
-      className="relative font-apple min-h-screen overflow-hidden bg-gradient-to-b from-blue-100 to-white py-20"
+      className="relative min-h-screen bg-gradient-to-br from-blue-50 to-white py-20 overflow-hidden"
     >
-      <div className=" mx-auto px-6 sm:px-8 lg:px-14">
+      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+        {/* Main Content */}
         <motion.div
           style={{ opacity, scale, y }}
-          className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-20"
+          className="grid lg:grid-cols-2 gap-16 items-center mb-20"
         >
-          <div className="lg:w-1/2">
-            <motion.h1
+          {/* Text Content */}
+          <div className="space-y-6">
+            <motion.h2
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-blue-800 mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 leading-tight"
             >
-              The Apostolic Intercession Ministry
-              <span className="text-blue-500">(TAIM)</span>
-            </motion.h1>
-          </div>
-          <div className="lg:w-1/2">
+              The Apostolic
+              <span className="block">Intercession Ministry</span>
+            </motion.h2>
+
             <motion.p
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg lg:text-left text-justify sm:text-xl text-gray-700 leading-relaxed"
+              className="text-xl text-gray-700 leading-relaxed"
             >
-              An interdenominational and non-denominational ministry, TAIM is
-              dedicated to the divine mandate of intercession until the Gospel
-              reaches every soul, churches are established in every town and
-              village, disciple-making movements become ingrained in every city,
-              and every church member is transformed to be more like Jesus.
+              An interdenominational ministry dedicated to the divine mandate of
+              intercession. We strive to transform lives, establish churches,
+              and spread the Gospel until every soul is reached and every church
+              member becomes more Christ-like.
             </motion.p>
-          </div>
-        </motion.div>
 
-        {/* Image Gallery */}
-        {images.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+            {/* Featured Stats */}
+            <div className="grid md:grid-cols-3 gap-6 pt-8">
+              {featuredStats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 * index }}
+                  className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all group"
+                >
+                  <stat.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="font-bold text-lg text-gray-800 mb-2">
+                    {stat.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-2">
+                    {stat.description}
+                  </p>
+                  <span className="font-semibold text-blue-600">
+                    {stat.value}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Image Gallery */}
+          <div className="grid grid-cols-2 gap-8">
             {images.slice(0, 3).map((image, index) => (
               <motion.div
                 key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.2 * index,
+                  type: "spring",
+                  stiffness: 100,
+                }}
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative overflow-hidden rounded-lg shadow-lg"
+                className="relative overflow-hidden rounded-2xl shadow-2xl group"
               >
-                <motion.img
+                <img
                   src={image}
                   alt={`TAIM Image ${index + 1}`}
-                  className="w-full h-64 object-cover"
-                  initial={{ opacity: 0, scale: 1.2 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.2 * index }}
+                  className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.2 * index }}
-                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <p className="text-white text-sm font-medium">
+                    Ministry Moment
+                  </p>
+                </div>
               </motion.div>
             ))}
-          </motion.div>
-        )}
+          </div>
+        </motion.div>
       </div>
 
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="parallax" data-speed="0.2">
-          <div className="absolute top-20 left-10 w-20 h-20 bg-blue-200 rounded-full opacity-50"></div>
-        </div>
-        <div className="parallax" data-speed="-0.1">
-          <div className="absolute bottom-40 right-20 w-32 h-32 bg-blue-300 rounded-full opacity-40"></div>
-        </div>
-        <div className="parallax" data-speed="0.3">
-          <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-blue-100 rounded-full opacity-30"></div>
-        </div>
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: [0.2, 0.4, 0.2], scale: [0.5, 1, 0.5] }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            repeatType: "loop",
+          }}
+          className="absolute top-20 -left-20 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl"
+        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: [0.2, 0.4, 0.2], scale: [0.5, 1, 0.5] }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            repeatType: "loop",
+            delay: 2.5,
+          }}
+          className="absolute bottom-20 -right-20 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl"
+        />
       </div>
     </section>
   );
